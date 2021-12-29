@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./layout/header.ejs')%>
+    <title></title>
+    <link rel="stylesheet" href="/css/index.css">
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/maps/china.js"></script>
+    <script>
+        var deviceWidth = document.documentElement.clientWidth;
+        if(deviceWidth > 720) deviceWidth = 720;
+        document.documentElement.style.fontSize = deviceWidth/7.2 + 'px';
+    </script>
+    <style type="text/css">
+        *{
+            margin: 0 ;
+            padding: 0;
+            list-style: none;
+        }
+        .clear:after{
+            display: block;
+            clear: both;
+            content: " ";
+        }
+        html{
+            font-size: 100px;
+            min-width: 7.2rem;
+        }
+        a{
+            text-decoration: none;
+        }
+        .box{
+            width: 7.2rem;
+            margin: 0 auto;
+        }
+        
+        table{
+            table-layout: fixed;
+            word-break: break-all; 
+            word-wrap: break-word; 
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table caption img{
+            
+            width: 100%;
+            display: block;
+        }
+        table thead td{
+            height: 30px;
+            background: #dbe0e3;
+        }
+        table thead td:first-child,table tr td:first-child{
+            border-right: 2px solid #c5c7c6;
+            width: 18px;
+        }
+        table tr{
+            font-size: 0.16rem;
+            
+            text-align: center;
+        }
+        table  td{
+            width: 0.56rem;
+            height: 45px;
+            border: 1px solid #c5c7c6;
+            
+        }
+        table tr td p{
+            font-size: 0.08rem;
+            color: #FFFFFF;
+            padding: 1px;
+        }
+        .rad{
+            border-radius: 6px;
+            padding: 1px;
+            
+        }
+        .blue{
+            background: #38aedc;
+        }
+        .pink{
+            background: #e9729c;
+        }
+        .gree{
+            background: #91bf38;
+        }
+        .yellow{
+            background: #f8b73f;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="layui-form-item" style="display: flex;justify-content: space-between;">
+        <h1 id="user_name" style="flex: 1;">23</h1>
+        <!-- <a class="layui-btn layui-btn-primary" id="clockin">签到</a> -->
+    </div>
+    <div class="layui-form-item" style="display: flex;justify-content: space-between;">
+        <h1 id="user_name" style="flex: 1;"></h1>
+        <!-- <a class="layui-btn layui-btn-primary" id="clockin">签到</a> -->
+    </div>
+    <div class="box">
+        <!-- sa -->
+        <table cellspacing="0" cellpadding="0">
+            <!-- <caption><img src="./img/10.jpg" ></caption> -->
+            <thead>
+                <td></td>
+                <td>周一</td>
+                <td>周二</td>
+                <td>周三</td>
+                <td>周四</td>
+                <td>周五</td>
+                <td>周六</td>
+                <td>周七</td>
+            </thead>
+
+            <tr>
+                <td>1</td>
+                <td rowspan="2" class="blue rad">
+                    <p >大学英语</p>
+                </td>
+                <td rowspan="2" class="pink rad">
+                    <p >思想道德修养与法律</p>
+                </td>
+                <td rowspan="2" class="gree rad">
+                    <p >形势与政策IV</p>
+                </td>
+                <td rowspan="2" class="yellow rad">
+                    <p>英语写作</p>
+                </td>
+                <td rowspan="2" class="blue rad ">
+                    <p>高等数学</p>
+                </td>
+                <td rowspan="4" class="pink rad">
+                    <p>开源软件技术</p>
+                </td>
+                <td></td>
+
+            </tr>
+            <tr>
+                <td>2</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td rowspan="2"  class="pink rad">
+                    <p>英语</p>
+                </td>
+                <td ></td>
+                <td rowspan="2"  class="yellow rad">
+                    <p>创业与就业指导</p>
+                </td>
+                <td rowspan="2"  class="blue rad ">
+                    <p>计算机科学导论</p>
+                </td>
+                <td rowspan="2"  class="pink rad">
+                    <p>大学英语</p>
+                </td>
+                <td ></td>
+                
+            </tr>
+            <tr>
+                <td>4</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td rowspan="2"  class="yellow rad">
+                    <p>移动互联网技术</p>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td rowspan="2"  class="yellow rad">
+                    <p>计算机科学导论</p>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td rowspan="2"  class="blue rad ">
+                    <p>计算机科学导论</p>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td rowspan="2"  class="blue rad ">
+                    <p>动画鉴赏</p>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td rowspan="2"  class="pink rad">
+                    <p>mysql入门与应用</p>
+                </td>
+                <td rowspan="2"  class="gree rad">
+                    <p>计算机编程基础</p>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <%- include('./layout/nav.ejs') %>
+    <script>
+        layui.use(['form', 'laydate'], function () {
+                            var form = layui.form;
+                            var laydate = layui.laydate;
+                     
+                            $.ajax({
+                                url: '/api/user/info',
+                                type: 'POST',
+                                success(data) {
+                                    if (data.code == 200) {
+                                        var user_data = data.data;
+                                        form.val("demo2", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+                                            "user_name": user_data.user_name,
+                                            "user_sex": user_data.user_sex,
+                                            "user_remark": user_data.user_remark,
+                                            "user_birthday": user_data.user_birthday.slice(0,10)
+                                        });
+                                        $('#clockin').attr('clockday',user_data.clockDays)
+                                        $('#user_name').text('你好，' + user_data.user_name+'你的课程表');
+                                        if(user_data.isClocked){
+                                            $('#clockin').text('已签到，共' + $('#clockin').attr('clockday')+"天")
+                                        }else{
+                                            $('#clockin').text("打卡签到")
+                                        }
+                                     
+                                        form.render();
+                                    } else {
+                                        layer.msg('获取用户信息失败');
+                                    }
+                                }
+                            })
+                         
+                            laydate.render({
+                                elem: '#date',
+                                value:new Date(),
+                                trigger: 'click'
+                            });
+       
+                            form.on('radio(radio1)', function (data) {
+                                console.log(data)
+                                form.render();
+                            });
+                            form.on('checkbox(radio1)', function (data) {
+                                console.log(data.elem); //得到radio原始DOM对象
+                                console.log(data.value); //被点击的radio的value值
+                            });
+                            form.on('submit(changePass)',data =>{
+                                layer.closeAll();
+                                var target = $(this);
+                                var index = layer.open({
+                                    type: 2,
+                                    area: ['90%', '400px'],
+                                    fixed: false, //不固定
+                                    maxmin: true,
+                                    title: '修改密码',
+                                    scrollbar:false,
+                                    content: 'update_pass' 
+                                });
+                            })
+                            $('#clockin').click(function(){
+                                var _this = $(this);
+                                $.ajax({
+                                        url:'/api/user/clockin',
+                                        type:'POST',
+                                        success(data){
+                                            layer.msg(data.msg);
+                                            var days = Number($('#clockin').attr('clockday')) + 1;
+                                            if(data.code ==200)
+                                            $('#clockin').text('已签到' + days +"天")
+                                        }
+                                    })
+
+                            })
+                            form.on('submit(formSubmit)', function (data) {
+                                layer.confirm('是否要更改资料？', {
+                                    btn: ['确定','取消'], //按钮,
+                                    title:'提示'
+                                }, function(){
+                                    var user_data = data.field;
+                                    $.ajax({
+                                        url:'/api/user/changeInfo',
+                                        type:'POST',
+                                        data:{
+                                            "user_name": user_data.user_name,
+                                            "user_sex": user_data.user_sex,
+                                            "user_remark": user_data.user_remark,
+                                            "user_birthday": user_data.user_birthday
+                                        },
+                                        success(data){
+                                            layer.msg('更新成功');
+                                            setTimeout(()=>{
+                                                // window.location.reload();
+                                            },300)
+                                        }
+                                    })
+                                }, function(){
+                                
+                                });
+                                
+                                return false;
+                            });
+                            form.render();
+        
+                        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<div class="nav-container">
+  <ul class="layui-nav app-nav" lay-filter="demo">
+    <!-- <div class="left" style="margin-right: 100px;">
+      <img src="/img/money.svg" class="layui-anim-scaleSpring" width="40" alt="">
+    </div> -->
+    <li class="layui-nav-item"><a href="/chart4">首页</a></li>
+    <li class="layui-nav-item"><a href="/chart2">课表</a></li>
+    <li class="layui-nav-item"><a href="/chart3">备忘录</a></li>
+    <li class="layui-nav-item"><a href="/index">消费记录</a></li>
+    <li class="layui-nav-item"><a href="/add_item">记账</a></li>
+    <li class="layui-nav-item"><a href="/chart">疫情防控</a></li>
+   
+    <li class="layui-nav-item"><a href="/my">我的</a></li>
+</ul>
+</div>
+<style>
+  .nav-container{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    background: #06368B;
+  }
+  .layui-nav.app-nav{
+    width: 100%;
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+    justify-content: center;
+    background: #06368B;
+ 
+  }
+
+</style>
+
+<script>
+    $(function(){
+        var [pathname] = location.pathname.split('?');
+        $(`.layui-nav a[href*='${pathname}']`).parent('li').addClass('layui-this');
+
+    })
+</script>

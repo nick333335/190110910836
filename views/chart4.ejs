@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <meta name="Title" content="Digital Clock" />
+        <meta name="description" content="Digital Clock is a jQuery plugin that transform a HTML5 canvas element into configurable digital clock animation using CreateJS library, the digital clock is form by 48 blocks where it will transform to different numbers.">
+		<meta name="keywords" content="digital, clock, plugin, canvas, timer, block, animation, transition">
+        
+     
+        <meta name="twitter:title" content="Digital Clock" />
+        <meta name="twitter:description" content="Digital Clock is a jQuery plugin that transform a HTML5 canvas element into configurable digital clock animation using CreateJS library, the digital clock is form by 48 blocks where it will transform to different numbers." />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <link rel="shortcut icon" href="https://demonisblack.com/code/2016/digitalclock/canvas/icon.ico" type="image/x-icon">
+        <link href="static/css/prism.css" rel="stylesheet" />
+        <link rel="stylesheet" href="static/css/main.css">
+        <%- include('./layout/header.ejs')%>
+    <title></title>
+    <link rel="stylesheet" href="/css/index.css">
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/maps/china.js"></script>
+        <style>
+            html, body{ background:#fff; margin:0; padding:0; }
+
+#mainHolder{ position:relative; width:100%; height:100%; font-family: 'Lato', sans-serif; text-align:center; }
+.startBackground{ background:#369; width:100%; padding:80px 0 50px; color:#fff; }
+.endBackground{ background:#ECEFF1; width:100%; padding:40px 0 30px; color:#369; }
+section{ width:100%; max-width:800px; margin:auto; padding:20px 0; position:relative; }
+.single{ padding:50px 0; }
+
+h1{ font-family: 'Lato', sans-serif; font-weight:bold; font-size:60px; margin:30px 0; text-transform: uppercase; }
+h2{ font-family: 'Lato', sans-serif; font-weight:bold; font-size:50px; margin:30px 0; text-transform: uppercase; }
+h3{ font-family: 'Lato', sans-serif; font-weight:bold; font-size:30px; margin:20px 0; text-transform: uppercase; }
+h5{ font-family: 'Lato', sans-serif; font-weight:bold; font-size:20px; line-height:30px; margin:10px 0; text-transform: uppercase; }
+.fontFeatures{ font-family: 'Lato', sans-serif; font-size:20px; line-height:20px; }
+.fontMask{ font-family: 'Lato', sans-serif; font-size:20px; line-height:30px; }
+
+.colorBlue{ color:#369; }
+.colorGrey{ color:#666; }
+
+hr{ border:none; border-bottom:#ECEFF1 solid 2px; width:90%; margin:auto; max-width:750px; }
+
+.demo{ width:85%; margin:auto;}
+.action { margin-top:50px; text-align:center; }
+.features{ text-align:left; width:80%; margin:auto; }
+.features li{ padding:10px 0; }
+.howto{ color:#999; }
+.step{ margin:50px 0 20px; }
+
+pre{ border-radius:10px; }
+
+.editHolder{ text-align:left; width:70%; margin: 50px auto 100px;}
+.editHolder .leftContent{ width:35%; float:left;}
+.editHolder .rightContent{ width:65%; float:left;}
+.editHolder .editActionHolder{ margin-top:100px;}
+
+@media only screen and (max-width: 900px) {
+	h1{ font-size:50px; margin:30px 0; }
+	h2{ font-size:40px; margin:30px 0; }
+	h3{ font-size:25px; margin:20px 0; }
+	h5{ font-size:15px; margin:10px 0; }
+	
+	.fontFeatures{ font-size:20px; line-height:20px; }
+	
+	.startBackground{ padding:70px 0 40px; }
+	.endBackground{ padding:30px 0 20px; }
+	.step{ margin:40px 0 20px; }
+}
+
+@media only screen and (max-width: 700px) {
+	h1{ font-size:40px; margin:20px 0; }
+	h2{ font-size:30px; margin:20px 0; }
+	h3{ font-size:20px; margin:15px 0; }
+	h5{ font-size:12px; margin:5px 0; }
+	
+	.fontFeatures{ font-size:15px; line-height:15px; }
+	
+	.startBackground{ padding:50px 0 20px; }
+	.endBackground{ padding:20px 0 15px; }
+	.step{ margin:30px 0 15px; }
+}
+
+/* General Buttons */
+button {
+  width: 130px;
+  height: 40px;
+  background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  border-bottom: 4px solid #2b8bc6;
+  color: #fbfbfb;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+  font-size: 15px;
+  text-align: left;
+  text-indent: 5px;
+  box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
+  cursor: pointer;
+
+/* Just for presentation */  
+  display: inline-block;
+  margin: 0 5px;
+  margin-bottom: 10px;
+}
+button:active {
+  box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
+  top: 1px;
+}
+
+button:after {
+  content: "";
+  width: 0;
+  height: 0;
+  display: block;
+  border-top: 20px solid #187dbc;
+  border-bottom: 20px solid #187dbc;
+  border-left: 16px solid transparent;
+  border-right: 20px solid #187dbc;
+  position: absolute;
+  opacity: 0.6; 
+  right: 0;
+  top: 0;
+  border-radius: 0 5px 5px 0;  
+}
+
+/* Button pointing left */
+
+button.back {
+  text-align: right;
+  padding-right: 12px;
+  box-sizing: border-box;
+}
+button.back:after {
+  content: "";
+  width: 0;
+  height: 0;
+  display: block;
+  border-top: 20px solid #187dbc;
+  border-bottom: 20px solid #187dbc;
+  border-right: 16px solid transparent;
+  border-left: 20px solid #187dbc;
+  position: absolute;
+  opacity: 0.6; 
+  left: 0;
+  top: 0;
+  border-radius: 5px 0 0 5px;    
+}
+
+/* Single buttons */
+
+button.site {
+  text-align: center;
+  text-indent: 0;
+}
+button.site:after{
+  display: none;
+}
+
+button.purchase{
+	width:200px;
+	height:60px;
+	font-size:18px;
+	font-weight:bold;	
+}
+
+.purchase:after {
+  border-top: 30px solid #187dbc;
+  border-bottom: 30px solid #187dbc;
+  border-left: 25px solid transparent;
+  border-right: 20px solid #187dbc; 
+}
+/* PrismJS 1.16.0
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #9a6e3a;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+
+        </style>
+    </head>
+    <body>
+
+
+        <!-- CONTENT START-->
+        <div id="mainHolder">
+        	<div class="startBackground">
+                <section>
+                    <div class="content">
+                    	<h1>欢迎登录</h1>
+                        <h5>浙江财经大学综合系统</h5>
+                        <br/>
+                    </div>
+            	</section>
+            </div>
+            
+            
+        </div>
+
+        <!-- CONTENT END-->
+        
+        <script src="static/js/jquery.min.js"></script>
+        
+        <script src="../public/js/prism.js"></script>
+        <script src="../public/js/createjs.min.js"></script>
+        <script src="../public/js/digital-clock.js"></script>
+        <script src="../public/js/init.js"></script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-424386-54');
+        </script>
+<%- include('./layout/nav.ejs') %>
+    </body>
+</html>
